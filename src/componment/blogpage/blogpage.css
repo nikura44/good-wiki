@@ -1,0 +1,12 @@
+.titleForm {
+    display: flex;
+    flex-direction: row;
+}
+
+.submit {
+    margin: 0 20px;
+}
+
+.username {
+    width: 50px;
+}
