@@ -1,12 +1,14 @@
 # good-wiki
 Use React+SpringBoot to build a simple blog/wiki website
 
-* The program is a semi-finished product and will continue to be updated *
+**The program is a semi-finished product and will continue to be updated**
 
 # introduce
 website code written with Reat
 
-API interface code has not been uploaded yet.the API interface specifications are listed as follows：
+To view the API interface code of good-wiki, please click:https://github.com/nikura44/good-wiki-boot
+
+the API interface specifications are listed as follows：
 
 GET：http://localhost:8080/showWikiList
 RETURN：
