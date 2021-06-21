@@ -11,6 +11,18 @@ const { TextArea } = Input;
 
 export default class BlogCreate extends React.Component {
 
+    componentDidMount() {
+        if (this.props.doWhat != null) {
+            this.setState({
+                description : this.props.doWhat.description,
+                username : this.props.doWhat.username,
+                value : this.props.doWhat.title,
+                info : this.props.doWhat.pageInfo
+            })
+
+        }
+    }
+
     state = {
         value: '',
         info:'',
@@ -18,7 +30,7 @@ export default class BlogCreate extends React.Component {
         description:'',
         username:'',
       };
-    
+
       onChange = ({ target: { value } }) => {
         this.setState({ value });
       };
@@ -30,19 +42,32 @@ export default class BlogCreate extends React.Component {
       }
 
       submitHtml(){
-        let bloginfo = {
-            title : this.state.value,
-            pageInfo : this.state.info,
-            username : this.state.username,
-            description : this.state.description,
-        }
-        console.log(bloginfo)
-        api.insertBlog(bloginfo).then(res => {
-            console.log(res)
-            this.setState({status : 'success'})
-            this.setState({value:''})
-            this.setState({description:''})
-        })
+
+              let bloginfo = {
+                  title : this.state.value,
+                  pageInfo : this.state.info,
+                  username : this.state.username,
+                  description : this.state.description,
+              }
+              console.log(bloginfo)
+          if(this.props.doWhat === ""){
+              api.insertBlog(bloginfo).then(res => {
+                  console.log(res)
+                  this.setState({status : 'success'})
+                  this.setState({value:''})
+                  this.setState({description:''})
+              })
+          } else {
+              api.updateBlog(bloginfo).then(res => {
+                  console.log("idI : === " + bloginfo)
+                  this.setState({status : 'success'})
+                  this.setState({value:''})
+                  this.setState({description:''})
+              })
+          }
+
+
+
       }
 
       gethtmldata = htmldata => {
@@ -60,7 +85,7 @@ export default class BlogCreate extends React.Component {
         }
         return(<div>
             <div className="titleForm">
-                <TextArea placeholder="在此处输入你的标题" autoSize 
+                <TextArea placeholder="在此处输入你的标题" autoSize
                 value={value}
                 onChange={this.onChange}
                 className="title"
@@ -72,7 +97,7 @@ export default class BlogCreate extends React.Component {
             </div>
             <Divider>Theme</Divider>
             <div className="titleForm">
-                <TextArea placeholder="在此处描述一下你的博客主题吧！" autoSize 
+                <TextArea placeholder="在此处描述一下你的博客主题吧！" autoSize
                 value={description}
                 onChange={this.onChangeDes}
                 className="title"
@@ -82,7 +107,7 @@ export default class BlogCreate extends React.Component {
                 onChange={this.onChangeUsr}/>
             </div>
             <Divider>Text</Divider>
-            <MarkdownEditor htmltrans={this.gethtmldata.bind(this)}/>
+            <MarkdownEditor htmltrans={this.gethtmldata.bind(this)} htmlContent={this.props.doWhat}/>
         </div>)
     }
 

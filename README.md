@@ -38,3 +38,9 @@ RETURN:
     "ok": true
 }
 ```
+
+#### 2021.06.21 
+```text
+I found a very serious problem today
+I did not design a route, all the jumps are refreshed components in the same page
+```

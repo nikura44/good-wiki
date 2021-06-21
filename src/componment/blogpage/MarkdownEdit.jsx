@@ -4,6 +4,8 @@ import BraftEditor from 'braft-editor'
 
 export default class BasicDemo extends React.Component {
 
+
+
   state = {
     editorState: BraftEditor.createEditorState('<p>退出代码块请使用 <b>Shift + Enter</b></p>'), // 设置编辑器初始内容
     outputHTML: '<p></p>'
@@ -12,7 +14,16 @@ export default class BasicDemo extends React.Component {
   componentDidMount () {
     this.isLivinig = true
     // 3秒后更改编辑器内容
-    setTimeout(this.setEditorContentAsync, 3000)
+    //setTimeout(this.setEditorContentAsync, 3000)
+    if(this.props.htmlContent != null){
+      this.setState({
+        outputHTML : this.props.htmlContent.pageInfo
+      })
+      console.log("wuhu" + this.props.htmlContent.pageInfo)
+      this.isLivinig && this.setState({
+        editorState: BraftEditor.createEditorState(this.props.htmlContent.pageInfo)
+      })
+    }
   }
 
   componentWillUnmount () {

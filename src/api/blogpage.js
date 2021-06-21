@@ -16,5 +16,22 @@ export default {
         }).then((res) => {
             return res;
         })
+    },
+
+    async updateBlog(bloginfo) {
+        return await axios({
+            method: 'post',
+            url: `${base}/updateBlog`,
+            data: {
+                "id" : bloginfo.id,
+                "title": bloginfo.title,
+                "pageInfo": bloginfo.pageInfo,
+                "username": bloginfo.username,
+                "description": bloginfo.description,
+            },
+            headers: {}
+        }).then((res) => {
+            return res;
+        })
     }
 }

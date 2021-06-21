@@ -4,7 +4,8 @@ import {List, Avatar, Space, Button, Divider} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import api from './../../api/index'
 import NicolasImg from './../../resource/coco.jpg'
-// import style from './wikiStyle.css'
+import './wikiStyle.css'
+import BlogCreate from "../blogpage/BlogCreate";
 
 // const listData = [];
 // for (let i = 0; i < 23; i++) {
@@ -54,6 +55,10 @@ export default class ListShow extends React.Component {
 
     returnToPageList = () => {
         this.setState({show : 'list'});
+    }
+
+    updateBlog = () => {
+        this.setState({show : 'updateBlog'});
     }
 
 
@@ -108,12 +113,16 @@ export default class ListShow extends React.Component {
             const theme = this.state.wikiPage.description;
             return <div>
                 <Button onClick={this.returnToPageList}>返回文章列表</Button>
+                <Button className="updateButton" onClick={this.updateBlog} type="primary">更新文章</Button>
                 <Divider>Title</Divider>
                 <h1 align="center">{title}</h1>
                 <p align="center">{theme} | created by {author}</p>
                 <Divider>Content</Divider>
                 <div dangerouslySetInnerHTML = {{__html: htmlString}} />
             </div>
+        }
+        if (this.state.show === 'updateBlog') {
+            return <BlogCreate doWhat={this.state.wikiPage}/>
         }
     }
 }

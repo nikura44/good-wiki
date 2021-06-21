@@ -4,8 +4,7 @@ import Homepage from './componment/homepage/Home'
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css'
 
-ReactDOM.render( <
-    Homepage / > ,
+ReactDOM.render( <Homepage /> ,
     document.getElementById('root')
 );
 
